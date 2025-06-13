@@ -2,7 +2,6 @@ const express = require("express");
 const app = express();
 const ServerConfig = require("./config");
 const ApiRoutes = require("./routes");
-const { CodeExec } = require("./judge");
 
 app.use(express.json());
 app.use("/api", ApiRoutes);

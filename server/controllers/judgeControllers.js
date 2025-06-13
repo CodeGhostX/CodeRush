@@ -57,7 +57,7 @@ const problemSubmission = async (req, res) => {
     if (furtherResponse && allTestCasesMatched) {
       responseMessage =
         type == "run"
-          ? "All test cases matched Successfully ✅"
+          ? "All demo test cases matched Successfully ✅"
           : "Problem Submitted Successfully ✅";
       return res.status(StatusCodes.OK).json({
         message: responseMessage,

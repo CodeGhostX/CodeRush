@@ -1,7 +1,9 @@
 const express = require("express");
-const { AuthControllers } = require("../controllers");
+const { ProblemControllers } = require("../controllers");
 const router = express.Router();
 
-router.post('/sign-up', AuthControllers.signUp);
+router.get('/all-problems', ProblemControllers.getAllProblems);
+router.get('/:id', ProblemControllers.getProblem);
+router.get('/problem-tag/:id', ProblemControllers.getTags);
 
 module.exports = router;

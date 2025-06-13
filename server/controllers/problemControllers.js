@@ -20,12 +20,13 @@ const getAllProblems = async (_, res) => {
 // Give the Problem details
 const getProblem = async (req, res) => {
   try {
-    const { problemId } = req.body;
-    const problemDetails = Problem.find({
+    const { id: problemId } = req.params;
+    const problemDetails = await Problem.findOne({
       where: {
         id: problemId,
       },
     });
+    console.log(problemDetails)
     return res.status(StatusCodes.OK).json({
       message: "Problem Detail fetched Successfully",
       data: problemDetails,
@@ -41,12 +42,12 @@ const getProblem = async (req, res) => {
 // Tag related to the problem
 const getTags = async (req, res) => {
   try {
-    const { problemId } = req.body;
-    const tags = ProblemTag.findAll({
+    const { id: problemId } = req.params;
+    const tags = await ProblemTag.findAll({
       where: {
         id: problemId
       }
-    })
+    });
     return res.status(StatusCodes.OK).json({
       message: "Tags for the problem fetched successfully",
       data: tags
