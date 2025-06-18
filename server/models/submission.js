@@ -25,16 +25,10 @@ module.exports = (sequelize, DataTypes) => {
       userId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
       },
       problemId: {
         type: DataTypes.INTEGER,
         allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
       },
       status: {
         type: DataTypes.ENUM(

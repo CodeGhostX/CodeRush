@@ -32,20 +32,22 @@ module.exports = (sequelize, DataTypes) => {
     title: {
       type: DataTypes.STRING,
       unique: true,
-      allowNull: false,
-      validate:{
-        notEmpty: true
-      }
+      allowNull: false
     },
     description: {
       type: DataTypes.TEXT,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
+      allowNull: false
     },
     level: {
       type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    explanation: {
+      type: DataTypes.TEXT,
+      allowNull: false
+    },
+    constraints: {
+      type: DataTypes.TEXT,
       allowNull: false
     }
   }, {

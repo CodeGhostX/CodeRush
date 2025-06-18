@@ -31,9 +31,6 @@ module.exports = {
       problemId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
         references: {
           model: "Problems",
           key: "id",
@@ -61,9 +58,6 @@ module.exports = {
           MATH
         ),
         allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
       },
       createdAt: {
         allowNull: false,

@@ -22,33 +22,23 @@ module.exports = (sequelize, DataTypes) => {
     fullname: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate:{
-        notEmpty: true
-      }
     },
     username: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-      validate:{
-        notEmpty: true
-      }
     },
     email: {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
       validate:{
-        notEmpty: true,
         isEmail: true
       }
     },
     password: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate:{
-        notEmpty: true
-      }
+      allowNull: false
     },
     role: {
       type: DataTypes.ENUM("USER", "ADMIN"),

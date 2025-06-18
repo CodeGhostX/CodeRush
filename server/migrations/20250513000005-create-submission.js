@@ -15,9 +15,6 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
         references: {
           model: "Users",
           key: "id",
@@ -28,9 +25,6 @@ module.exports = {
       problemId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
         references: {
           model: "Problems",
           key: "id",

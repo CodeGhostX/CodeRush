@@ -23,16 +23,10 @@ module.exports = (sequelize, DataTypes) => {
     problemId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      validate: {
-        notEmpty: true
-      }
     },
     testcaseId: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        notEmpty: true
-      }
+      allowNull: false
     },
     expected:{
       type: DataTypes.STRING,

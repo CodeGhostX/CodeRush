@@ -12,20 +12,22 @@ module.exports = {
       title: {
         type: Sequelize.STRING,
         unique: true,
-        allowNull: false,
-        validate:{
-          notEmpty: true
-        }
+        allowNull: false
       },
       description: {
         type: Sequelize.TEXT,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
+        allowNull: false
       },
       level: {
         type: Sequelize.INTEGER,
+        allowNull: false
+      },
+      explanation: {
+        type: Sequelize.TEXT,
+        allowNull: false,
+      },
+      constraints: {
+        type: Sequelize.TEXT,
         allowNull: false
       },
       createdAt: {

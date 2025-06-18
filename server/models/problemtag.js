@@ -37,11 +37,9 @@ module.exports = (sequelize, DataTypes) => {
     {
       problemId: {
         type: DataTypes.INTEGER,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
+        allowNull: false
       },
+      // Here we need to make this Enum Centralized ??
       tagName: {
         type: DataTypes.ENUM(
           ARRAY,
@@ -61,10 +59,7 @@ module.exports = (sequelize, DataTypes) => {
           GREEDY,
           MATH
         ),
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-        },
+        allowNull: false
       },
     },
     {
