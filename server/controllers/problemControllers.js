@@ -1,3 +1,4 @@
+const { Submission } = require("../judge");
 const { StatusCodes } = require("http-status-codes");
 const { Problem } = require("../models");
 const { ProblemTag } = require("../models");
@@ -26,7 +27,7 @@ const getProblem = async (req, res) => {
         id: problemId,
       },
     });
-    console.log(problemDetails)
+    console.log(problemDetails);
     return res.status(StatusCodes.OK).json({
       message: "Problem Detail fetched Successfully",
       data: problemDetails,
@@ -45,12 +46,15 @@ const getTags = async (req, res) => {
     const { id: problemId } = req.params;
     const tags = await ProblemTag.findAll({
       where: {
-        id: problemId
-      }
+        problemId: problemId,
+      },
+    });
+    const alltags = tags.map((item) => {
+      return item.tagName;
     });
     return res.status(StatusCodes.OK).json({
       message: "Tags for the problem fetched successfully",
-      data: tags
+      data: alltags,
     });
   } catch (error) {
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
@@ -60,10 +64,39 @@ const getTags = async (req, res) => {
   }
 };
 
+const getDemoExamples = async (req, res) => {
+  try {
+    const { problemId } = req.params;
+    const testCaseswithOutput = await Submission.testcaseOutputFetch(problemId);
+    let numberOfTestCasesToSend = 0;
+    if(testCaseswithOutput.length <= 5) numberOfTestCasesToSend = 1
+    else if(testCaseswithOutput.length >= 5 && testCaseswithOutput.length <= 10) numberOfTestCasesToSend = 2
+    else numberOfTestCasesToSend = 3;
+    const result = [];
+    for(let i=0;i<numberOfTestCasesToSend;i++){
+      const temp = {
+        test: testCaseswithOutput[i].test,
+        output: testCaseswithOutput[i].Outputs[0].expected,
+      }
+      result.push(temp);
+    }
+    return res.status(StatusCodes.OK).json({
+      message: "Test Cases fetched Successfully",
+      data: result
+    });
+  } catch (error) {
+    return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: "Some Error Occured while getting demo examples",
+      error: error
+    })
+  }
+};
+
 // Getting the problems based on the Level
 
 module.exports = {
   getAllProblems,
   getProblem,
-  getTags
+  getTags,
+  getDemoExamples
 };

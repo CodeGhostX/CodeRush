@@ -1,12 +1,14 @@
 import React from "react";
 import CodeEditor from "../components/CodeEditor";
 import ProblemDetails from "../components/ProblemDetails";
+import { useParams } from "react-router-dom";
 
 const SingleProblem = () => {
+  const { id } = useParams();
   return (
     <div className="md:grid md:grid-cols-10 mt-5 mx-2 ">
       {/* Left Part */}
-      <ProblemDetails/>
+      <ProblemDetails problemId={id} />
 
       {/* Right Part */}
       <div className="col-span-6">
