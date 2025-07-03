@@ -1,0 +1,30 @@
+services:
+  mysql:
+    image: mysql:9
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+      - MYSQL_DATABASE=codechef
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "--silent"]
+      interval: 5s
+      timeout: 10s
+      retries: 10
+  cpp-runner:
+    build: .
+    container_name: cpp-code-runner
+    command: sh -c "node index.js"
+    ports:
+      - "3000:3000"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - .:/app
+    restart: unless-stopped
+  
+volumes:
+  mysql_data:
