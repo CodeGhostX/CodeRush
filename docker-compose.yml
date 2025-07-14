@@ -1,4 +1,10 @@
 services:
+  client:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
   mysql:
     image: mysql:9
     environment:
@@ -14,9 +20,12 @@ services:
       timeout: 10s
       retries: 10
   cpp-runner:
-    build: .
-    container_name: cpp-code-runner
-    command: sh -c "node index.js"
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      - PORT=3000
+      - JWT_SECRET=skdnfkjdnfkjdbfvjndsdjhfgewjhrgfejhrgfujhegrjfhebfjmcvbdjfmbv
     ports:
       - "3000:3000"
     depends_on:

@@ -1,4 +1,4 @@
-FROM node:23-slim
+FROM node
 
 RUN apt-get update && apt-get install -y \
     g++ \
@@ -8,12 +8,14 @@ RUN apt-get update && apt-get install -y \
     curl \
     && apt-get clean
 
-WORKDIR /app
+WORKDIR /app/server
 
-COPY . .
+COPY package*.json ./
 
 RUN npm install
 
+COPY . .
+
 EXPOSE 3000
 
-CMD ["npm", "start"]
+CMD ["sh", "-c", "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all && node index.js"]
